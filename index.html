@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>信用卡管理</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>💳 信用卡管理</h1>
+  <nav>
+    <button data-tab="cards" class="on">我的卡</button>
+    <button data-tab="analysis">分析</button>
+    <button data-tab="knowledge">知识</button>
+    <button data-tab="data">数据</button>
+  </nav>
+</header>
+<main>
+  <section id="tab-cards"></section>
+  <section id="tab-analysis" hidden></section>
+  <section id="tab-knowledge" hidden></section>
+  <section id="tab-data" hidden></section>
+</main>
+<button class="btn fab" id="addBtn" title="添加信用卡">+</button>
+
+<div class="modal" id="modal">
+  <form class="panel" id="form">
+    <h3 id="formTitle">添加信用卡</h3>
+    <div class="row">
+      <button type="button" class="btn ghost" id="camBtn">📷 拍照 / 选图识别</button>
+    </div>
+    <input type="file" id="photo" accept="image/*" capture="environment" hidden>
+    <div id="ocrStatus">识别只在浏览器本地进行，不上传图片；仅保存卡号后 4 位。</div>
+
+    <div class="row">
+      <div><label>银行</label><input name="bank" list="banks" required></div>
+      <div><label>卡片名称</label><input name="name" placeholder="如 经典白金卡"></div>
+    </div>
+    <datalist id="banks"></datalist>
+    <div class="row">
+      <div><label>卡号后 4 位</label><input name="last4" maxlength="4" inputmode="numeric"></div>
+      <div><label>有效期 (MM/YY)</label><input name="expiry" placeholder="08/29"></div>
+      <div><label>卡组织</label>
+        <select name="network"><option>银联</option><option>Visa</option><option>MasterCard</option><option>American Express</option><option>JCB</option></select></div>
+    </div>
+    <div class="row">
+      <div><label>额度 (元)</label><input name="limit" type="number" min="0"></div>
+      <div><label>卡面颜色</label><input name="color" type="color" value="#2f5bea"></div>
+    </div>
+    <div class="row">
+      <div><label>账单日 (每月几号)</label><input name="billDay" type="number" min="1" max="31" required></div>
+      <div><label>账单日后几天还款</label><input name="graceDays" type="number" min="0" value="20"></div>
+    </div>
+    <div class="row">
+      <div><label>年费 (元)</label><input name="annualFee" type="number" min="0" value="0"></div>
+      <div><label>年费扣费日期</label><input name="feeDate" type="date"></div>
+    </div>
+    <label>年费减免政策</label>
+    <div class="row">
+      <select name="waiverType">
+        <option value="none">无减免</option>
+        <option value="count">刷满 N 笔</option>
+        <option value="amount">刷满 N 元</option>
+        <option value="points">积分抵扣</option>
+        <option value="rigid">刚性年费 (不可免)</option>
+        <option value="other">其他</option>
+      </select>
+      <input name="waiverTarget" type="number" min="0" placeholder="目标 (笔/元)">
+      <input name="waiverDone" type="number" min="0" placeholder="今年已完成">
+    </div>
+    <textarea name="waiverNote" placeholder="政策说明，如：每年 1 月 1 日至 12 月 31 日消费满 6 笔免次年年费"></textarea>
+    <label>权益 (每行一条)</label>
+    <textarea name="benefits" placeholder="机场贵宾厅 4 次/年&#10;每月 5 元星巴克券"></textarea>
+    <label>备注</label><input name="note">
+    <div class="row" style="margin-top:16px">
+      <button type="submit" class="btn">保存</button>
+      <button type="button" class="btn ghost" id="cancel">取消</button>
+      <button type="button" class="btn del" id="delBtn" hidden>删除</button>
+    </div>
+  </form>
+</div>
+
+<script src="knowledge.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

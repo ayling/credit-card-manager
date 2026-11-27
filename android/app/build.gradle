@@ -1,0 +1,28 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.example.cardmanager'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'com.example.cardmanager'
+        minSdk 29
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+// 网页文件只维护在工程根目录，构建前同步进 assets
+tasks.register('syncWeb', Copy) {
+    from("${rootDir}/..") { include 'index.html', 'style.css', 'app.js', 'knowledge.js' }
+    into "${projectDir}/src/main/assets"
+}
+preBuild.dependsOn syncWeb
