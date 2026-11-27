@@ -18,11 +18,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+    sourceSets.main.assets.srcDirs = ["${buildDir}/generated/webAssets"]
 }
 
-// 网页文件只维护在工程根目录，构建前同步进 assets
+// 使用生成目录，不改写现有 src/main/assets 副本
 tasks.register('syncWeb', Copy) {
     from("${rootDir}/..") { include 'index.html', 'style.css', 'app.js', 'knowledge.js' }
-    into "${projectDir}/src/main/assets"
+    into "${buildDir}/generated/webAssets"
 }
 preBuild.dependsOn syncWeb

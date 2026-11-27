@@ -15,7 +15,7 @@ class ChooserClient extends WebChromeClient {
 
     @Override
     public boolean onShowFileChooser(WebView v, ValueCallback<Uri[]> cb, FileChooserParams p) {
-        activity.openChooser(cb);
+        activity.openChooser(cb, p);
         return true;
     }
 }

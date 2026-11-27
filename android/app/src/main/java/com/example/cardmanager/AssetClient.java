@@ -20,6 +20,11 @@ class AssetClient extends WebViewClient {
     }
 
     @Override
+    public boolean shouldOverrideUrlLoading(WebView v, WebResourceRequest r) {
+        return !"https".equals(r.getUrl().getScheme()) || !HOST.equals(r.getUrl().getHost());
+    }
+
+    @Override
     public WebResourceResponse shouldInterceptRequest(WebView v, WebResourceRequest r) {
         Uri u = r.getUrl();
         if (!HOST.equals(u.getHost())) return null;

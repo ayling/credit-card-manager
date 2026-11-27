@@ -1,0 +1,9 @@
+.DS_Store
+android/.gradle/
+android/local.properties
+android/.debug.keystore
+android/build-work.*/
+android/app/build/
+android/app/src/main/assets/
+android/build/*
+!android/build/cardmanager-debug.apk
